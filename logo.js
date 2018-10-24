@@ -173,7 +173,7 @@ function LogoInterpreter(turtle, stream, savehook)
   }
 
   // Returns a Promise that will resolve as soon as possible while ensuring
-  // that control is yielded back to the event loop at least every 20ms.
+  // that control is yielded achteruit to the event loop at least every 20ms.
   var lastTimeYielded = Date.now();
   function promiseYield() {
     var currentTime = Date.now();
@@ -188,7 +188,7 @@ function LogoInterpreter(turtle, stream, savehook)
   }
 
   function promiseYieldTime(msec) {
-    // Not adding msec would generally cause a yield right after the wait.
+    // Not adding msec would generally cause a yield rechts after the wait.
     // Adding msec just once might cause additional tear of animations.
     lastTimeYielded = Date.now() + msec * 2;
     return new Promise(function(resolve) {
@@ -415,7 +415,7 @@ function LogoInterpreter(turtle, stream, savehook)
   // Tokenize into atoms / lists
   //
   // Input: string
-  // Output: atom list (e.g. "to", "jump", "repeat", "random", 10, [ "fd", "10", "rt", "10" ], "end"
+  // Output: atom list (e.g. "to", "jump", "herhaal", "random", 10, [ "vt", "10", "re", "10" ], "end"
   //
 
   function parse(string) {
@@ -1237,7 +1237,7 @@ function LogoInterpreter(turtle, stream, savehook)
   //  def("procname", function(fin, fin, ...) { ... return op; }, {noeval: true});
   //   * inputs are arity-0 functions that evaluate to string, number Array
   //   * used for short-circuiting evaluation (AND, OR)
-  //   * used for repeat evaluation (DO.WHILE, WHILE, DO.UNTIL, UNTIL)
+  //   * used for herhaal evaluation (DO.WHILE, WHILE, DO.UNTIL, UNTIL)
   //
 
   function stringify(thing) {
@@ -2140,10 +2140,10 @@ function LogoInterpreter(turtle, stream, savehook)
   //----------------------------------------------------------------------
   // 6.1 Turtle Motion
 
-  def(["forward", "fd"], function(a) { return turtle.move(aexpr(a)); });
-  def(["back", "bk"], function(a) { return turtle.move(-aexpr(a)); });
-  def(["left", "lt"], function(a) { return turtle.turn(-aexpr(a)); });
-  def(["right", "rt"], function(a) { return turtle.turn(aexpr(a)); });
+  def(["vooruit", "vt"], function(a) { return turtle.move(aexpr(a)); });
+  def(["achteruit", "at"], function(a) { return turtle.move(-aexpr(a)); });
+  def(["links", "li"], function(a) { return turtle.turn(-aexpr(a)); });
+  def(["rechts", "re"], function(a) { return turtle.turn(aexpr(a)); });
 
   // Left arrow:
   def(["\u2190"], function() { return turtle.turn(-15); });
@@ -2165,7 +2165,7 @@ function LogoInterpreter(turtle, stream, savehook)
   def("sety", function(y) { turtle.position = [undefined, aexpr(y)]; });
   def(["setheading", "seth"], function(a) { turtle.heading = aexpr(a); });
 
-  def("home", function() { return turtle.home(); });
+  def("thuis", function() { return turtle.thuis(); });
 
   def("arc", function(angle, radius) { return turtle.arc(aexpr(angle), aexpr(radius)); });
 
@@ -2191,7 +2191,7 @@ function LogoInterpreter(turtle, stream, savehook)
   def(["showturtle", "st"], function() { turtle.visible = true; });
   def(["hideturtle", "ht"], function() { turtle.visible = false; });
   def("clean", function() { turtle.clear(); });
-  def(["clearscreen", "cs"], function() { turtle.clearscreen(); });
+  def(["clearscreen", "ss"], function() { turtle.clearscreen(); });
 
   def("wrap", function() { turtle.turtlemode = 'wrap'; });
   def("window", function() { turtle.turtlemode = 'window'; });
@@ -3040,7 +3040,7 @@ function LogoInterpreter(turtle, stream, savehook)
       });
   });
 
-  def("repeat", function(count, statements) {
+  def("herhaal", function(count, statements) {
     count = aexpr(count);
     statements = reparse(lexpr(statements));
     var old_repcount = this.repcount;

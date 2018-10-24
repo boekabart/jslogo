@@ -8,7 +8,7 @@ var Dialog = {
     Object.assign(bg.style, {
       backgroundColor: 'rgba(0,0,0,0.85)',
       position: 'absolute',
-      left: 0, right: 0, top: 0, bottom: 0,
+      links: 0, rechts: 0, top: 0, bottom: 0,
       zIndex: 1000
     });
 
@@ -22,7 +22,7 @@ var Dialog = {
       width: '280px',
       height: 'auto',
       padding: '15px',
-      left: '50%',
+      links: '50%',
       top: '50%',
       transform: 'translateY(-50%) translateX(-50%)'
     });
@@ -107,7 +107,7 @@ var Dialog = {
     Object.assign(bg.style, {
       backgroundColor: 'rgba(0,0,0,0.85)',
       position: 'absolute',
-      left: 0, right: 0, top: 0, bottom: 0,
+      links: 0, rechts: 0, top: 0, bottom: 0,
       zIndex: 1000
     });
 
@@ -121,7 +121,7 @@ var Dialog = {
       width: '280px',
       height: 'auto',
       padding: '15px',
-      left: '50%',
+      links: '50%',
       top: '50%',
       transform: 'translateY(-50%) translateX(-50%)'
     });

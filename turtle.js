@@ -73,11 +73,11 @@
     if (events) {
       events.addEventListener('mousemove', function(e) {
         var rect = events.getBoundingClientRect();
-        this._mousemove(e.clientX - rect.left, e.clientY - rect.top, e.buttons);
+        this._mousemove(e.clientX - rect.links, e.clientY - rect.top, e.buttons);
       }.bind(this));
       events.addEventListener('mousedown', function(e) {
         var rect = events.getBoundingClientRect();
-        this._mouseclick(e.clientX - rect.left, e.clientY - rect.top, e.buttons);
+        this._mouseclick(e.clientX - rect.links, e.clientY - rect.top, e.buttons);
       }.bind(this));
     }
   }
@@ -179,7 +179,7 @@
 
       var w = this.width / this.sx, h = this.height / this.sy;
 
-      var left = -w / 2, right = w / 2,
+      var links = -w / 2, rechts = w / 2,
           bottom = -h / 2, top = h / 2;
 
       var ix, iy, wx, wy, fx, fy, less;
@@ -187,7 +187,7 @@
       // Hack to match UCBLogo: don't draw line across viewport on
       // `SETXY 250 10  SETXY 300 20  SETXY 350 30`
       if (setpos && this.turtlemode === 'wrap') {
-        var oob = (x < left || x >= right || y < bottom || y >= top);
+        var oob = (x < links || x >= rechts || y < bottom || y >= top);
         var px = x, py = y;
         if (this.was_oob) {
           var dx = mod(x + w / 2, w) - (x + w / 2);
@@ -222,10 +222,10 @@
           fx = 1;
           fy = 1;
 
-          if (x < left) {
-            fx = (this.x - left) / (this.x - x);
-          } else if (x > right) {
-            fx = (this.x - right) / (this.x - x);
+          if (x < links) {
+            fx = (this.x - links) / (this.x - x);
+          } else if (x > rechts) {
+            fx = (this.x - rechts) / (this.x - x);
           }
 
           if (y < bottom) {
@@ -235,7 +235,7 @@
           }
 
           if (!isFinite(fx) || !isFinite(fy)) {
-            console.log('x', x, 'left', left, 'right', right);
+            console.log('x', x, 'links', links, 'rechts', rechts);
             console.log('y', y, 'bottom', bottom, 'top', top);
             console.log('fx', fx, 'fy', fy);
             throw new Error("Wrapping error: non-finite fraction");
@@ -250,11 +250,11 @@
           wy = y;
 
           if (fx < 1 && fx <= fy) {
-            less = (x < left);
-            ix = less ? left : right;
+            less = (x < links);
+            ix = less ? links : rechts;
             iy = this.y - fx * (this.y - y);
             x += less ? w : -w;
-            wx = less ? right : left;
+            wx = less ? rechts : links;
             wy = iy;
           } else if (fy < 1 && fy <= fx) {
             less = (y < bottom);
@@ -345,7 +345,7 @@
     }},
 
     clearscreen: {value: function() {
-      this.home();
+      this.thuis();
       this.clear();
     }},
 
@@ -361,7 +361,7 @@
       }
     }},
 
-    home: {value: function() {
+    thuis: {value: function() {
       this._moveto(0, 0);
       this.r = deg2rad(90);
     }},

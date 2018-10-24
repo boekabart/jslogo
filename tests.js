@@ -359,7 +359,7 @@ QUnit.test("Data Structure Primitives", function(t) {
 
   this.assert_stream('show array 2', '{[] []}\n');
   this.assert_stream('make "a (array 5 0) ' +
-                     'repeat 5 [ setitem repcount-1 :a repcount*repcount ] ' +
+                     'herhaal 5 [ setitem repcount-1 :a repcount*repcount ] ' +
                      'show :a', '{1 4 9 16 25}@0\n');
   this.assert_stream('make "a { 1 2 3 } ' +
                      'show :a', '{1 2 3}\n');
@@ -505,16 +505,16 @@ QUnit.test("Data Structure Primitives", function(t) {
   // 2.3 Data Mutators
   //
 
-  this.assert_equals('make "s [] repeat 5 [ push "s repcount ] :s', [5, 4, 3, 2, 1]);
-  this.assert_equals('make "s "0 repeat 5 [ push "s repcount ] :s', '543210');
+  this.assert_equals('make "s [] herhaal 5 [ push "s repcount ] :s', [5, 4, 3, 2, 1]);
+  this.assert_equals('make "s "0 herhaal 5 [ push "s repcount ] :s', '543210');
 
   this.assert_equals('make "s [ a b c ] (list pop "s pop "s pop "s)', ["a", "b", "c"]);
   this.assert_equals('make "s [ a b c ] pop "s pop "s  :s', ["c"]);
   this.assert_equals('make "s "abc (list pop "s pop "s pop "s)', ["a", "b", "c"]);
   this.assert_equals('make "s "abc  pop "s  :s', 'bc');
 
-  this.assert_equals('make "q [] repeat 5 [ queue "q repcount ] :q', [1, 2, 3, 4, 5]);
-  this.assert_equals('make "q "0 repeat 5 [ queue "q repcount ] :q', '012345');
+  this.assert_equals('make "q [] herhaal 5 [ queue "q repcount ] :q', [1, 2, 3, 4, 5]);
+  this.assert_equals('make "q "0 herhaal 5 [ queue "q repcount ] :q', '012345');
 
   this.assert_equals('make "q [ a b c ] (list dequeue "q dequeue "q dequeue "q)', ["c", "b", "a"]);
   this.assert_equals('make "q [ a b c ]  dequeue "q  dequeue "q  :q', ["a"]);
@@ -980,26 +980,26 @@ QUnit.test("Graphics", function(t) {
       red = [0xff, 0, 0, 0xff];
 
   this.run('clearscreen');
-  this.assert_equals('clean home (list heading xcor ycor)', [0, 0, 0]);
-  this.assert_pixel('cs', 150, 150, [0xff,0xff,0xff,0xff]);
+  this.assert_equals('clean thuis (list heading xcor ycor)', [0, 0, 0]);
+  this.assert_pixel('ss', 150, 150, [0xff,0xff,0xff,0xff]);
 
   //
   // 6.1 Turtle Motion
   //
 
-  this.assert_equals('home forward 100 pos', [0, 100]);
-  this.assert_equals('home fd 100 pos', [0, 100]);
-  this.assert_equals('home back 100 pos', [0, -100]);
-  this.assert_equals('home bk 100 pos', [0, -100]);
-  this.assert_equals('home left 45 heading', -45);
-  this.assert_equals('home lt 45 heading', -45);
-  this.assert_equals('home right 45 heading', 45);
-  this.assert_equals('home rt 45 heading', 45);
+  this.assert_equals('thuis vooruit 100 pos', [0, 100]);
+  this.assert_equals('thuis vt 100 pos', [0, 100]);
+  this.assert_equals('thuis achteruit 100 pos', [0, -100]);
+  this.assert_equals('thuis at 100 pos', [0, -100]);
+  this.assert_equals('thuis links 45 heading', -45);
+  this.assert_equals('thuis li 45 heading', -45);
+  this.assert_equals('thuis rechts 45 heading', 45);
+  this.assert_equals('thuis re 45 heading', 45);
 
-  this.assert_equals('home \u2190 heading', -15);
-  this.assert_equals('home \u2192 heading', 15);
-  this.assert_equals('home \u2191 pos', [0, 10]);
-  this.assert_equals('home \u2193 pos', [0, -10]);
+  this.assert_equals('thuis \u2190 heading', -15);
+  this.assert_equals('thuis \u2192 heading', 15);
+  this.assert_equals('thuis \u2191 pos', [0, 10]);
+  this.assert_equals('thuis \u2193 pos', [0, -10]);
 
 
   this.assert_equals('setpos [ 12 34 ] pos', [12, 34]);
@@ -1010,11 +1010,11 @@ QUnit.test("Graphics", function(t) {
   this.assert_equals('setheading 69 heading', 69);
   this.assert_equals('seth 13 heading', 13);
 
-  this.assert_equals('forward 100 rt 90 home (list heading xcor ycor)', [0, 0, 0]);
+  this.assert_equals('vooruit 100 re 90 thuis (list heading xcor ycor)', [0, 0, 0]);
 
-  this.assert_equals('home arc 123 456 (list heading xcor ycor)', [0, 0, 0]);
+  this.assert_equals('thuis arc 123 456 (list heading xcor ycor)', [0, 0, 0]);
 
-  this.assert_pixels('cs  setpw 10  arc 45 100', [
+  this.assert_pixels('ss  setpw 10  arc 45 100', [
     [150, 150, white],
     [150+100*Math.cos(Math.PI * 8/8), 150-100*Math.sin(Math.PI * 8/8)|0, white],
     [150+100*Math.cos(Math.PI * 7/8), 150-100*Math.sin(Math.PI * 7/8)|0, white],
@@ -1026,7 +1026,7 @@ QUnit.test("Graphics", function(t) {
     [150+100*Math.cos(Math.PI * 1/8), 150-100*Math.sin(Math.PI * 1/8)|0, white],
     [150+100*Math.cos(Math.PI * 0/8), 150-100*Math.sin(Math.PI * 0/8)|0, white]
   ]);
-  this.assert_pixels('cs  setpw 10  arc -45 100', [
+  this.assert_pixels('ss  setpw 10  arc -45 100', [
     [150, 150, white],
     [150+100*Math.cos(Math.PI * 8/8), 150-100*Math.sin(Math.PI * 8/8)|0, white],
     [150+100*Math.cos(Math.PI * 7/8), 150-100*Math.sin(Math.PI * 7/8)|0, white],
@@ -1039,13 +1039,13 @@ QUnit.test("Graphics", function(t) {
     [150+100*Math.cos(Math.PI * 0/8), 150-100*Math.sin(Math.PI * 0/8)|0, white]
   ]);
 
-  this.assert_pixels('cs  pu  setxy 50 50  arc 360 20  fill', [
+  this.assert_pixels('ss  pu  setxy 50 50  arc 360 20  fill', [
     [150, 150, white],
     [150 + 50, 150 - 50, black]
   ]);
 
   ['"red', '4', '[99 0 0]'].forEach(function(color) {
-    this.assert_pixels('cs  pu  filled ' + color + ' [ arc 135 100 ]', [
+    this.assert_pixels('ss  pu  filled ' + color + ' [ arc 135 100 ]', [
       [150, 150, white],
       [150 + 100, 150 - 100, white],
       [150 + 10, 150 - 90, red],
@@ -1074,7 +1074,7 @@ QUnit.test("Graphics", function(t) {
   this.assert_equals('ht shownp', 0);
   this.assert_equals('setpos [ 12 34 ] clean pos', [12, 34]);
   this.assert_equals('setpos [ 12 34 ] clearscreen (list heading xcor ycor)', [0, 0, 0]);
-  this.assert_equals('setpos [ 12 34 ] cs (list heading xcor ycor)', [0, 0, 0]);
+  this.assert_equals('setpos [ 12 34 ] ss (list heading xcor ycor)', [0, 0, 0]);
   this.assert_equals('wrap turtlemode', 'WRAP');
 
   this.assert_equals('setxy 0 0 setxy 160 160 (list xcor ycor)', [-140, -140]);
@@ -1095,13 +1095,13 @@ QUnit.test("Graphics", function(t) {
 
   this.assert_equals('setlabelfont "Times\\ New\\ Roman  labelfont', 'Times New Roman');
 
-  this.assert_equals('cs  wrap  setscrunch 0.5 0.5  fd 50 pos', [0, 50]);
-  this.assert_equals('cs  wrap  setscrunch 0.5 0.5  fd 350 pos', [0, -250]);
-  this.assert_equals('cs  setscrunch 1 0.5  setxy 50 50  setscrunch 1 1  pos', [50, 25]);
+  this.assert_equals('ss  wrap  setscrunch 0.5 0.5  vt 50 pos', [0, 50]);
+  this.assert_equals('ss  wrap  setscrunch 0.5 0.5  vt 350 pos', [0, -250]);
+  this.assert_equals('ss  setscrunch 1 0.5  setxy 50 50  setscrunch 1 1  pos', [50, 25]);
 
 
   // SETSCRUNCH + ARC
-  this.assert_pixels('cs  setscrunch 0.5 1.5  setpw 10  arc 360 100', [
+  this.assert_pixels('ss  setscrunch 0.5 1.5  setpw 10  arc 360 100', [
     [150, 150, white],
 
     [150 - 100, 150, white],
@@ -1116,7 +1116,7 @@ QUnit.test("Graphics", function(t) {
   ]);
 
   // WRAP + SETSCRUNCH + ARC
-  this.assert_pixels('cs  setscrunch 0.5 3  setpw 10  arc 360 100', [
+  this.assert_pixels('ss  setscrunch 0.5 3  setpw 10  arc 360 100', [
     [150, 150, black],
 
     [150 - 100, 150, white],
@@ -1130,7 +1130,7 @@ QUnit.test("Graphics", function(t) {
     [150, 150 + 149, white]
   ]);
 
-  this.run('cs setscrunch 1 1');
+  this.run('ss setscrunch 1 1');
 
   //
   // 6.4 Turtle and Window Queries
@@ -1163,16 +1163,16 @@ QUnit.test("Graphics", function(t) {
   this.run('penpaint');
 
   this.assert_equals('setpencolor 0 pencolor', 'black');
-  this.assert_pixel('cs setpw 10  fd 0', 150, 150, black);
+  this.assert_pixel('ss setpw 10  vt 0', 150, 150, black);
 
   this.assert_equals('setpc 0 pencolor', 'black');
-  this.assert_pixel('cs setpw 10  fd 0', 150, 150, black);
+  this.assert_pixel('ss setpw 10  vt 0', 150, 150, black);
 
   this.assert_equals('setpencolor "#123456 pencolor', '#123456');
-  this.assert_pixel('cs setpw 10  fd 0', 150, 150, [0x12, 0x34, 0x56, 0xff]);
+  this.assert_pixel('ss setpw 10  vt 0', 150, 150, [0x12, 0x34, 0x56, 0xff]);
 
   this.assert_equals('setpencolor [0 50 99] pencolor', '#0080ff');
-  this.assert_pixel('cs setpw 10  fd 0', 150, 150, [0, 0x80, 0xff, 0xff]);
+  this.assert_pixel('ss setpw 10  vt 0', 150, 150, [0, 0x80, 0xff, 0xff]);
 
   this.assert_equals('setpensize 6 pensize', [6, 6]);
   this.assert_equals('setpensize [6 6] pensize', [6, 6]);
@@ -1242,7 +1242,7 @@ QUnit.test("Workspace Management", function(t) {
   this.assert_equals('to square :x output :x * :x end  copydef "multbyself "square  multbyself 5', 25);
 
   this.assert_equals('define "square [[x][output :x * :x]]  square 5', 25);
-  this.assert_equals('make "a 0  define "p [[][repeat 5 [ make "a :a + 1 ]]]  p 5  :a', 5);
+  this.assert_equals('make "a 0  define "p [[][herhaal 5 [ make "a :a + 1 ]]]  p 5  :a', 5);
 
   this.assert_equals('to foo :x :y output :x + :y end  text "foo',
                      [['x', 'y'], ['output', ':x', '+', ':y']]);
@@ -1549,9 +1549,9 @@ QUnit.test("Control Structures", function(t) {
   this.assert_equals('runresult [ make "x 1 ]', []);
   this.assert_equals('runresult [ 1 + 2 ]', [3]);
 
-  this.assert_equals('make "c 0  repeat 5 [ make "c :c + 1 ]  :c', 5);
-  this.assert_equals('make "c 0  repeat 4 [ make "c :c + repcount ]  :c', 10);
-  this.assert_equals('make "c 0  repeat 4 [ make "c :c + # ]  :c', 10);
+  this.assert_equals('make "c 0  herhaal 5 [ make "c :c + 1 ]  :c', 5);
+  this.assert_equals('make "c 0  herhaal 4 [ make "c :c + repcount ]  :c', 10);
+  this.assert_equals('make "c 0  herhaal 4 [ make "c :c + # ]  :c', 10);
 
   this.assert_equals('make "c 0  to foo forever [ make "c :c + 1 if repcount = 5 [ stop ] ] end  foo  :c', 5);
   this.assert_equals('make "c 0  to foo forever [ make "c :c + repcount if repcount = 4 [ stop ] ] end  foo  :c', 10);
@@ -1751,16 +1751,16 @@ QUnit.test("Error Messages", function(t) {
   this.assert_error("make [] 123", "Expected string", 4);
   this.assert_error("(def [])", "Expected string", 4);
 
-  this.assert_error('fd50', "Need a space between FD and 50", 39);
+  this.assert_error('vt50', "Need a space between VT and 50", 39);
 
   this.assert_error("(erase {})", "ERASE: Expected list", 4);
   this.assert_error("(map \"show {})", "MAP: Expected list", 4);
   this.assert_error("(map \"sum [1 2] [1])", "MAP: Expected lists of equal length", 4);
   this.assert_error("to 123", "TO: Expected identifier");
   this.assert_error("to +", "TO: Expected identifier");
-  this.assert_error("to fd :x bk :x end", "TO: Can't redefine primitive FD", 22);
-  this.assert_error("define \"fd [[x] [bk :x]]", "DEFINE: Can't redefine primitive FD", 22);
-  this.assert_error("define \"fd [[x]]", "DEFINE: Expected list of length 2", 4);
+  this.assert_error("to vt :x at :x end", "TO: Can't redefine primitive VT", 22);
+  this.assert_error("define \"vt [[x] [at :x]]", "DEFINE: Can't redefine primitive VT", 22);
+  this.assert_error("define \"vt [[x]]", "DEFINE: Expected list of length 2", 4);
   this.assert_error("def \"nosuchproc", "DEF: Don't know how to NOSUCHPROC", 24);
   this.assert_error("def \"def", "DEF: Can't show definition of primitive DEF", 22);
   this.assert_error("text \"nosuchproc", "TEXT: Don't know how to NOSUCHPROC", 24);
@@ -1811,23 +1811,23 @@ QUnit.test("Error Messages", function(t) {
 
 QUnit.test("Regression Tests", function(t) {
   this.assert_error('ern "i  make "x :i + 1', "Don't know about variable I");
-  this.assert_equals('make "x 0  repeat 3 [ for [ i 1 4 ] [ make "x :x + 1 ] ]  :x', 12);
+  this.assert_equals('make "x 0  herhaal 3 [ for [ i 1 4 ] [ make "x :x + 1 ] ]  :x', 12);
   this.assert_error('ern "i  for [i 0 100 :i+1] []', "Don't know about variable I");
   this.assert_error('ern "i  for [i 0 100 :i + 1] []', "Don't know about variable I");
   this.assert_equals('make "i 5  make "x 0  for [ i 0 100 :i ] [ make "x :x + :i ]  :x', 1050);
-  this.assert_error("fd 100 50 rt 90", "Don't know what to do with 50");
+  this.assert_error("vt 100 50 re 90", "Don't know what to do with 50");
   this.assert_equals("to foo output 123 end  make \"v foo", undefined);
   this.assert_equals("to foo end", undefined);
   this.assert_equals("setpos [ -1 0 ]  123", 123);
   this.assert_equals("to foo output 234 end foo", 234);
   this.assert_equals("to foo output 234 END foo", 234);
-  this.assert_error("to whatever fd 100", "TO: Expected END");
+  this.assert_error("to whatever vt 100", "TO: Expected END");
   this.assert_equals('"abc;def', "abc");
   this.assert_equals('"abc\\;def', "abc;def");
   this.assert_equals('"abc\\\\def', "abc\\def");
   this.assert_equals('"a\\ b', 'a b');
-  this.assert_equals('repeat 1 [ make "v "abc\\;def ]  :v', "abc\\;def");
-  this.assert_error('repeat 1 [ make "v "abc;def ]  :v', "Expected ']'");
+  this.assert_equals('herhaal 1 [ make "v "abc\\;def ]  :v', "abc\\;def");
+  this.assert_error('herhaal 1 [ make "v "abc;def ]  :v', "Expected ']'");
   this.assert_equals('make "a [ a b c ]  make "b :a  pop "a  :b', ["a", "b", "c"]);
   this.assert_equals('to foo :BAR output :BAR end  foo 1', 1);
   this.assert_equals('(word "a (char 10) "b)', 'a\nb');
@@ -1844,7 +1844,7 @@ QUnit.test("Regression Tests", function(t) {
   this.assert_equals('show "b\n1', 1);
 
   this.assert_equals('to f output 1 end (f + 1)', 2);
-  this.assert_equals('setpos [150 150]  setheading 0  fd 10  pos ', [150, -140]);
+  this.assert_equals('setpos [150 150]  setheading 0  vt 10  pos ', [150, -140]);
 
   this.assert_equals(
     'make "a 0  do.while [ make "a :a + 1 ] notequalp :a 5  :a', 5);
@@ -1939,7 +1939,7 @@ QUnit.test("Arity of Primitives", function(t) {
     ['arraytolist', [1, 1, 1]],
     ['ascii', [1, 1, 1]],
     ['ashift', [2, 2, 2]],
-    ['back', [1, 1, 1]],
+    ['achteruit', [1, 1, 1]],
     ['background', [0, 0, 0]],
     ['before?', [2, 2, 2]],
     ['beforep', [2, 2, 2]],
@@ -1950,7 +1950,7 @@ QUnit.test("Arity of Primitives", function(t) {
     ['bitnot', [1, 1, 1]],
     ['bitor', [0, 2, -1]],
     ['bitxor', [0, 2, -1]],
-    ['bk', [1, 1, 1]],
+    ['at', [1, 1, 1]],
     ['bl', [1, 1, 1]],
     ['buried', [0, 0, 0]],
     ['buried?', [1, 1, 1]],
@@ -1976,7 +1976,7 @@ QUnit.test("Arity of Primitives", function(t) {
     ['copydef', [2, 2, 2]],
     ['cos', [1, 1, 1]],
     ['count', [1, 1, 1]],
-    ['cs', [0, 0, 0]],
+    ['ss', [0, 0, 0]],
     //['cslsload', [1, 1, 1]],
     ['ct', [0, 0, 0]],
     //['cursor', [0, 0, 0]],
@@ -2006,7 +2006,7 @@ QUnit.test("Arity of Primitives", function(t) {
     ['erps', [0, 0, 0]],
     ['error', [0, 0, 0]],
     ['exp', [1, 1, 1]],
-    ['fd', [1, 1, 1]],
+    ['vt', [1, 1, 1]],
     ['fence', [0, 0, 0]],
     ['fill', [0, 0, 0]],
     ['filled', [2, 2, 2]],
@@ -2015,7 +2015,7 @@ QUnit.test("Arity of Primitives", function(t) {
     ['font', [0, 0, 0]],
     ['forever', [1, 1, 1]],
     ['form', [3, 3, 3]],
-    ['forward', [1, 1, 1]],
+    ['vooruit', [1, 1, 1]],
     ['fput', [2, 2, 2]],
     //['fs', [0, 0, 0]],
     //['fullscreen', [0, 0, 0]],
@@ -2031,7 +2031,7 @@ QUnit.test("Arity of Primitives", function(t) {
     ['heading', [0, 0, 0]],
     //['help', [0, 1, 1]],
     ['hideturtle', [0, 0, 0]],
-    ['home', [0, 0, 0]],
+    ['thuis', [0, 0, 0]],
     ['ht', [0, 0, 0]],
     ['if', [2, 2, 3]],
     ['ifelse', [3, 3, 3]],
@@ -2047,7 +2047,7 @@ QUnit.test("Arity of Primitives", function(t) {
     ['label', [1, 1, /*1*/ -1]], // nonstandard: unlimited, like PRINT
     ['labelsize', [0, 0, 0]],
     ['last', [1, 1, 1]],
-    ['left', [1, 1, 1]],
+    ['links', [1, 1, 1]],
     ['less?', [2, 2, 2]],
     ['lessequal?', [2, 2, 2]],
     ['lessequalp', [2, 2, 2]],
@@ -2064,7 +2064,7 @@ QUnit.test("Arity of Primitives", function(t) {
     ['lowercase', [1, 1, 1]],
     ['lput', [2, 2, 2]],
     ['lshift', [2, 2, 2]],
-    ['lt', [1, 1, 1]],
+    ['li', [1, 1, 1]],
     //['macro?', [1, 1, 1]],
     //['macrop', [1, 1, 1]],
     ['make', [2, 2, 2]],
@@ -2153,12 +2153,12 @@ QUnit.test("Arity of Primitives", function(t) {
     ['remainder', [2, 2, 2]],
     ['remprop', [2, 2, 2]],
     ['repcount', [0, 0, 0]],
-    ['repeat', [2, 2, 2]],
+    ['herhaal', [2, 2, 2]],
     ['rerandom', [0, 0, 1]],
-    ['right', [1, 1, 1]],
+    ['rechts', [1, 1, 1]],
     //['rl', [0, 0, 0]],
     ['round', [1, 1, 1]],
-    ['rt', [1, 1, 1]],
+    ['re', [1, 1, 1]],
     ['run', [1, 1, 1]],
     ['runparse', [1, 1, 1]],
     ['runresult', [1, 1, 1]],

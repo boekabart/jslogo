@@ -409,7 +409,7 @@ function initInput() {
 
     if (logo && turtle) {
       turtle.resize(w, h);
-      logo.run('cs');
+      logo.run('ss');
     }
   }
 }());
@@ -589,7 +589,7 @@ window.addEventListener('DOMContentLoaded', function() {
         savehook(name, def);
       }
     });
-  logo.run('cs');
+  logo.run('ss');
   initStorage(function (def) {
     logo.run(def);
   });
